@@ -1,0 +1,58 @@
+[
+  {
+    "id": "honesty_master",
+    "name": "Dürüstlük Ustası",
+    "description": "Dürüstlük görevlerini mükemmel tamamladın",
+    "icon": "🛡️",
+    "color": "#3b82f6",
+    "requirement": "dürüstlük görevinde 90+ puan"
+  },
+  {
+    "id": "empathy_hero",
+    "name": "Empati Kahramanı",
+    "description": "Başkalarının duygularını harika anlıyorsun",
+    "icon": "❤️",
+    "color": "#ec4899",
+    "requirement": "empati görevinde 90+ puan"
+  },
+  {
+    "id": "team_player",
+    "name": "Takım Oyuncusu",
+    "description": "İşbirliği konusunda örnek oldun",
+    "icon": "🤝",
+    "color": "#10b981",
+    "requirement": "işbirliği görevinde 90+ puan"
+  },
+  {
+    "id": "responsible_star",
+    "name": "Sorumluluk Yıldızı",
+    "description": "Görevlerini sahiplendin",
+    "icon": "⭐",
+    "color": "#f59e0b",
+    "requirement": "sorumluluk görevinde 90+ puan"
+  },
+  {
+    "id": "respect_champion",
+    "name": "Saygı Şampiyonu",
+    "description": "Farklılıklara saygı gösterdin",
+    "icon": "🌟",
+    "color": "#8b5cf6",
+    "requirement": "saygı görevinde 90+ puan"
+  },
+  {
+    "id": "values_explorer",
+    "name": "Değerler Kaşifi",
+    "description": "Tüm kontrol noktalarını ziyaret ettin",
+    "icon": "🗺️",
+    "color": "#06b6d4",
+    "requirement": "5 kontrol noktasını tamamla"
+  },
+  {
+    "id": "perfect_journey",
+    "name": "Mükemmel Yolculuk",
+    "description": "Tüm görevlerde 90+ puan aldın",
+    "icon": "🏆",
+    "color": "#fbbf24",
+    "requirement": "Tüm görevlerde 90+ puan"
+  }
+]

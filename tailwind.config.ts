@@ -9,23 +9,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#0ea5e9",
-        secondary: "#06b6d4",
+        primary: "#6366f1",
+        secondary: "#8b5cf6",
         success: "#10b981",
         warning: "#f59e0b",
         danger: "#ef4444",
       },
       animation: {
-        'flow': 'flow 3s ease-in-out infinite',
+        'bounce-slow': 'bounce 2s infinite',
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'spin-slow': 'spin 8s linear infinite',
       },
-      keyframes: {
-        flow: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' },
-        }
-      }
     },
   },
   plugins: [],

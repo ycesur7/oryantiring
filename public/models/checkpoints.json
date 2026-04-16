@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "name": "Dürüstlük Köşesi",
+    "value": "dürüstlük",
+    "lat": 41.0082,
+    "lng": 28.9784,
+    "description": "Doğru olanı söylemek ve yapmak cesaret ister",
+    "icon": "shield",
+    "color": "#3b82f6",
+    "scenario": {
+      "title": "Kayıp Cüzdan",
+      "question": "Okul bahçesinde içinde para olan bir cüzdan buldun. Ne yaparsın?",
+      "options": [
+        { "text": "Hemen müdürlüğe teslim ederim", "points": 100, "feedback": "Mükemmel! Dürüstlük en değerli hazinedir." },
+        { "text": "Sahibini bulmaya çalışırım", "points": 90, "feedback": "Harika bir yaklaşım! Empati ve dürüstlük bir arada." },
+        { "text": "Arkadaşlarıma sorarım ne yapmalıyım diye", "points": 60, "feedback": "İyi bir başlangıç, ama doğruyu sen de biliyorsun." },
+        { "text": "Kimse görmedi, alırım", "points": 0, "feedback": "Dürüstlük sadece izlendiğimizde değil, her zaman önemlidir." }
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "name": "Empati Durağı",
+    "value": "empati",
+    "lat": 41.0085,
+    "lng": 28.9790,
+    "description": "Başkalarının duygularını anlamak güçtür",
+    "icon": "heart",
+    "color": "#ec4899",
+    "scenario": {
+      "title": "Üzgün Arkadaş",
+      "question": "Sınıf arkadaşın sınavdan kötü not aldığı için çok üzgün. Sen ne yaparsın?",
+      "options": [
+        { "text": "Yanına gider, dinler ve destek olurum", "points": 100, "feedback": "Harika! Empati kurmak en güzel hediyedir." },
+        { "text": "Ona çalışma teklifi yaparım", "points": 80, "feedback": "Güzel bir yaklaşım! Hem empati hem çözüm odaklısın." },
+        { "text": "Sadece 'Geçmiş olsun' derim", "points": 50, "feedback": "İyi bir başlangıç, ama daha fazlasını yapabilirsin." },
+        { "text": "Kendi notumla övünürüm", "points": 0, "feedback": "Empati, başkalarının duygularını anlamaktır." }
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "name": "İşbirliği Meydanı",
+    "value": "işbirliği",
+    "lat": 41.0088,
+    "lng": 28.9787,
+    "description": "Birlikte başarıyı yakalamak",
+    "icon": "users",
+    "color": "#10b981",
+    "scenario": {
+      "title": "Grup Projesi",
+      "question": "Grup projesinde bir arkadaşın görevini yapmadı. Ne yaparsın?",
+      "options": [
+        { "text": "Onunla konuşur, yardım teklif ederim", "points": 100, "feedback": "Mükemmel! İşbirliği anlayış ve yardımlaşma gerektirir." },
+        { "text": "Görevini ben yaparım ama ona söylerim", "points": 70, "feedback": "İyi niyetlisin ama iletişim daha önemli." },
+        { "text": "Öğretmene söylerim", "points": 40, "feedback": "Önce arkadaşınla konuşmayı dene." },
+        { "text": "Umursamam, kendi işime bakarım", "points": 0, "feedback": "Takım çalışması herkesin katkısını gerektirir." }
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "name": "Sorumluluk Noktası",
+    "value": "sorumluluk",
+    "lat": 41.0091,
+    "lng": 28.9793,
+    "description": "Görevlerimizi sahiplenmek",
+    "icon": "briefcase",
+    "color": "#f59e0b",
+    "scenario": {
+      "title": "Unutulan Görev",
+      "question": "Sınıf nöbetçiliğini unutmuşsun ve sınıf dağınık kalmış. Ne yaparsın?",
+      "options": [
+        { "text": "Hemen temizler ve özür dilerim", "points": 100, "feedback": "Harika! Sorumluluğu üstlenmek olgunluktur." },
+        { "text": "Bir dahaki sefere daha dikkatli olurum", "points": 60, "feedback": "İyi ama şimdi ne yapacaksın?" },
+        { "text": "Başkasının da unuttuğunu söylerim", "points": 30, "feedback": "Sorumluluğu paylaşmak onu azaltmaz." },
+        { "text": "Kimse fark etmez, sessiz kalırım", "points": 0, "feedback": "Sorumluluk almak cesaret ister." }
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "name": "Saygı Bahçesi",
+    "value": "saygı",
+    "lat": 41.0094,
+    "lng": 28.9788,
+    "description": "Farklılıklara değer vermek",
+    "icon": "star",
+    "color": "#8b5cf6",
+    "scenario": {
+      "title": "Farklı Görüş",
+      "question": "Arkadaşın seninle tamamen farklı bir fikre sahip. Nasıl tepki verirsin?",
+      "options": [
+        { "text": "Fikrini dinler, kendi görüşümü saygıyla paylaşırım", "points": 100, "feedback": "Mükemmel! Saygı, farklılıkları zenginlik olarak görmektir." },
+        { "text": "Tartışmadan kaçınırım", "points": 50, "feedback": "Saygılısın ama iletişim de önemli." },
+        { "text": "Fikrimin daha doğru olduğunu ispatlarım", "points": 30, "feedback": "Her fikir değerlidir, kazanmak değil anlamak önemli." },
+        { "text": "Onunla dalga geçerim", "points": 0, "feedback": "Saygı, her görüşe değer vermektir." }
+      ]
+    }
+  }
+]
