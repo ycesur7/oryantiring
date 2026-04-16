@@ -7,16 +7,37 @@
     "description": "Doğru olanı söylemek ve yapmak cesaret ister",
     "icon": "🛡️",
     "color": "#3b82f6",
-    "scenario": {
-      "title": "Kayıp Cüzdan",
-      "question": "Okul bahçesinde içinde para olan bir cüzdan buldun. Ne yaparsın?",
-      "options": [
-        { "text": "Hemen müdürlüğe teslim ederim", "points": 100, "feedback": "Mükemmel! Dürüstlük en değerli hazinedir." },
-        { "text": "Sahibini bulmaya çalışırım", "points": 90, "feedback": "Harika bir yaklaşım! Empati ve dürüstlük bir arada." },
-        { "text": "Arkadaşlarıma sorarım ne yapmalıyım diye", "points": 60, "feedback": "İyi bir başlangıç, ama doğruyu sen de biliyorsun." },
-        { "text": "Kimse görmedi, alırım", "points": 0, "feedback": "Dürüstlük sadece izlendiğimizde değil, her zaman önemlidir." }
-      ]
-    }
+    "scenarios": [
+      {
+        "title": "Kayıp Cüzdan",
+        "question": "Okul bahçesinde içinde para olan bir cüzdan buldun. Ne yaparsın?",
+        "options": [
+          { "text": "Hemen müdürlüğe teslim ederim", "points": 100, "feedback": "Mükemmel! Dürüstlük en değerli hazinedir." },
+          { "text": "Sahibini bulmaya çalışırım", "points": 90, "feedback": "Harika bir yaklaşım! Empati ve dürüstlük bir arada." },
+          { "text": "Arkadaşlarıma sorarım ne yapmalıyım diye", "points": 60, "feedback": "İyi bir başlangıç, ama doğruyu sen de biliyorsun." },
+          { "text": "Kimse görmedi, alırım", "points": 0, "feedback": "Dürüstlük sadece izlendiğimizde değil, her zaman önemlidir." }
+        ]
+      },
+      {
+        "title": "Sınav Kopya",
+        "question": "Sınavda arkadaşın senden kopya çekmek istiyor. Ne yaparsın?",
+        "options": [
+          { "text": "Kibarca reddeder, sonra yardım teklif ederim", "points": 100, "feedback": "Harika! Hem dürüst hem de yardımseversin." },
+          { "text": "Öğretmene söylerim", "points": 70, "feedback": "Dürüst ama önce arkadaşınla konuşabilirdin." },
+          { "text": "Görmezden gelirim", "points": 40, "feedback": "Pasif kalmak da bir seçim ama en iyisi değil." },
+          { "text": "Kopya veririm", "points": 0, "feedback": "Bu hem sana hem arkadaşına zarar verir." }
+        ]
+      },
+      {
+        "title": "Yanlış Hesap",
+        "question": "Kantinde fazla para üstü verdiler. Ne yaparsın?",
+        "options": [
+          { "text": "Hemen geri veririm", "points": 100, "feedback": "Mükemmel! Küçük dürüstlükler büyük karakterler yaratır." },
+          { "text": "Bir dahaki sefere düzeltirim", "points": 50, "feedback": "Neden bekleyesin ki? Şimdi yapabilirsin." },
+          { "text": "Sessiz kalırım", "points": 0, "feedback": "Dürüstlük her durumda geçerlidir." }
+        ]
+      }
+    ]
   },
   {
     "id": 2,
@@ -26,16 +47,38 @@
     "description": "Başkalarının duygularını anlamak güçtür",
     "icon": "❤️",
     "color": "#ec4899",
-    "scenario": {
-      "title": "Üzgün Arkadaş",
-      "question": "Sınıf arkadaşın sınavdan kötü not aldığı için çok üzgün. Sen ne yaparsın?",
-      "options": [
-        { "text": "Yanına gider, dinler ve destek olurum", "points": 100, "feedback": "Harika! Empati kurmak en güzel hediyedir." },
-        { "text": "Ona çalışma teklifi yaparım", "points": 80, "feedback": "Güzel bir yaklaşım! Hem empati hem çözüm odaklısın." },
-        { "text": "Sadece 'Geçmiş olsun' derim", "points": 50, "feedback": "İyi bir başlangıç, ama daha fazlasını yapabilirsin." },
-        { "text": "Kendi notumla övünürüm", "points": 0, "feedback": "Empati, başkalarının duygularını anlamaktır." }
-      ]
-    }
+    "scenarios": [
+      {
+        "title": "Üzgün Arkadaş",
+        "question": "Sınıf arkadaşın sınavdan kötü not aldığı için çok üzgün. Sen ne yaparsın?",
+        "options": [
+          { "text": "Yanına gider, dinler ve destek olurum", "points": 100, "feedback": "Harika! Empati kurmak en güzel hediyedir." },
+          { "text": "Ona çalışma teklifi yaparım", "points": 80, "feedback": "Güzel bir yaklaşım! Hem empati hem çözüm odaklısın." },
+          { "text": "Sadece 'Geçmiş olsun' derim", "points": 50, "feedback": "İyi bir başlangıç, ama daha fazlasını yapabilirsin." },
+          { "text": "Kendi notumla övünürüm", "points": 0, "feedback": "Empati, başkalarının duygularını anlamaktır." }
+        ]
+      },
+      {
+        "title": "Yeni Öğrenci",
+        "question": "Sınıfa yeni gelen bir öğrenci teneffüste yalnız. Ne yaparsın?",
+        "options": [
+          { "text": "Yanına gider, kendimi tanıtır ve arkadaşlarımla tanıştırırım", "points": 100, "feedback": "Muhteşem! Empati göstermek harika bir başlangıç." },
+          { "text": "Gülümser, selam veririm", "points": 70, "feedback": "İyi ama biraz daha yaklaşabilirsin." },
+          { "text": "Öğretmenin ilgilenmesini beklerim", "points": 30, "feedback": "Sen de yardım edebilirsin!" },
+          { "text": "Kendi işimle ilgilenirim", "points": 0, "feedback": "Başkalarının duygularını düşünmek önemli." }
+        ]
+      },
+      {
+        "title": "Hasta Arkadaş",
+        "question": "Arkadaşın hasta olduğu için okula gelemiyor. Ne yaparsın?",
+        "options": [
+          { "text": "Ders notlarını alır, ziyaret ederim", "points": 100, "feedback": "Harika! Gerçek bir arkadaşsın." },
+          { "text": "Mesaj atarım, geçmiş olsun dilerim", "points": 80, "feedback": "Güzel ama yüz yüze daha anlamlı olabilir." },
+          { "text": "İyileşince görüşürüz derim", "points": 40, "feedback": "Şimdi desteğe ihtiyacı var." },
+          { "text": "Bir şey yapmam", "points": 0, "feedback": "Arkadaşlık zor zamanlarda belli olur." }
+        ]
+      }
+    ]
   },
   {
     "id": 3,
@@ -45,16 +88,37 @@
     "description": "Birlikte başarıyı yakalamak",
     "icon": "🤝",
     "color": "#10b981",
-    "scenario": {
-      "title": "Grup Projesi",
-      "question": "Grup projesinde bir arkadaşın görevini yapmadı. Ne yaparsın?",
-      "options": [
-        { "text": "Onunla konuşur, yardım teklif ederim", "points": 100, "feedback": "Mükemmel! İşbirliği anlayış ve yardımlaşma gerektirir." },
-        { "text": "Görevini ben yaparım ama ona söylerim", "points": 70, "feedback": "İyi niyetlisin ama iletişim daha önemli." },
-        { "text": "Öğretmene söylerim", "points": 40, "feedback": "Önce arkadaşınla konuşmayı dene." },
-        { "text": "Umursamam, kendi işime bakarım", "points": 0, "feedback": "Takım çalışması herkesin katkısını gerektirir." }
-      ]
-    }
+    "scenarios": [
+      {
+        "title": "Grup Projesi",
+        "question": "Grup projesinde bir arkadaşın görevini yapmadı. Ne yaparsın?",
+        "options": [
+          { "text": "Onunla konuşur, yardım teklif ederim", "points": 100, "feedback": "Mükemmel! İşbirliği anlayış ve yardımlaşma gerektirir." },
+          { "text": "Görevini ben yaparım ama ona söylerim", "points": 70, "feedback": "İyi niyetlisin ama iletişim daha önemli." },
+          { "text": "Öğretmene söylerim", "points": 40, "feedback": "Önce arkadaşınla konuşmayı dene." },
+          { "text": "Umursamam, kendi işime bakarım", "points": 0, "feedback": "Takım çalışması herkesin katkısını gerektirir." }
+        ]
+      },
+      {
+        "title": "Spor Müsabakası",
+        "question": "Takım oyununda bir arkadaşın hata yaptı ve gol yedik. Ne yaparsın?",
+        "options": [
+          { "text": "Moralini yükseltir, birlikte kazanacağımızı söylerim", "points": 100, "feedback": "Harika! Gerçek takım ruhu bu!" },
+          { "text": "Bir şey demem, oyuna devam ederim", "points": 60, "feedback": "Destek vermek daha güzel olurdu." },
+          { "text": "Kızarım ve hatayı yüzüne vururum", "points": 0, "feedback": "Bu takım ruhuna zarar verir." }
+        ]
+      },
+      {
+        "title": "Sınıf Temizliği",
+        "question": "Sınıf temizliği günü bazı arkadaşların çalışmıyor. Ne yaparsın?",
+        "options": [
+          { "text": "Onları da dahil edecek şekilde görev dağıtımı yaparım", "points": 100, "feedback": "Mükemmel liderlik! Herkesi dahil ettin." },
+          { "text": "Çalışanlarla birlikte işi bitiririm", "points": 70, "feedback": "İyi ama herkesi dahil etmeyi dene." },
+          { "text": "Öğretmene şikayet ederim", "points": 30, "feedback": "Önce sen çözmeyi dene." },
+          { "text": "Ben de çalışmam", "points": 0, "feedback": "Bu sorunu çözmez, daha da kötüleştirir." }
+        ]
+      }
+    ]
   },
   {
     "id": 4,
@@ -64,16 +128,36 @@
     "description": "Görevlerimizi sahiplenmek",
     "icon": "⭐",
     "color": "#f59e0b",
-    "scenario": {
-      "title": "Unutulan Görev",
-      "question": "Sınıf nöbetçiliğini unutmuşsun ve sınıf dağınık kalmış. Ne yaparsın?",
-      "options": [
-        { "text": "Hemen temizler ve özür dilerim", "points": 100, "feedback": "Harika! Sorumluluğu üstlenmek olgunluktur." },
-        { "text": "Bir dahaki sefere daha dikkatli olurum", "points": 60, "feedback": "İyi ama şimdi ne yapacaksın?" },
-        { "text": "Başkasının da unuttuğunu söylerim", "points": 30, "feedback": "Sorumluluğu paylaşmak onu azaltmaz." },
-        { "text": "Kimse fark etmez, sessiz kalırım", "points": 0, "feedback": "Sorumluluk almak cesaret ister." }
-      ]
-    }
+    "scenarios": [
+      {
+        "title": "Unutulan Görev",
+        "question": "Sınıf nöbetçiliğini unutmuşsun ve sınıf dağınık kalmış. Ne yaparsın?",
+        "options": [
+          { "text": "Hemen temizler ve özür dilerim", "points": 100, "feedback": "Harika! Sorumluluğu üstlenmek olgunluktur." },
+          { "text": "Bir dahaki sefere daha dikkatli olurum", "points": 60, "feedback": "İyi ama şimdi ne yapacaksın?" },
+          { "text": "Başkasının da unuttuğunu söylerim", "points": 30, "feedback": "Sorumluluğu paylaşmak onu azaltmaz." },
+          { "text": "Kimse fark etmez, sessiz kalırım", "points": 0, "feedback": "Sorumluluk almak cesaret ister." }
+        ]
+      },
+      {
+        "title": "Kırılan Cam",
+        "question": "Yanlışlıkla sınıfın camını kırdın. Ne yaparsın?",
+        "options": [
+          { "text": "Hemen öğretmene söyler, özür dilerim", "points": 100, "feedback": "Mükemmel! Hatalarını kabul etmek cesaret ister." },
+          { "text": "Arkadaşlarıma söylerim ama öğretmene söylemem", "points": 40, "feedback": "Sorumluluğu tam almadın." },
+          { "text": "Kimseye söylemem", "points": 0, "feedback": "Sorumluluk kaçmak sorunu çözmez." }
+        ]
+      },
+      {
+        "title": "Ödev Teslimi",
+        "question": "Ödevini yapmayı unuttun. Öğretmen soruyor. Ne yaparsın?",
+        "options": [
+          { "text": "Doğruyu söyler, bir gün daha süre isterim", "points": 100, "feedback": "Harika! Dürüstlük ve sorumluluk bir arada." },
+          { "text": "Evde unuttuğumu söylerim", "points": 30, "feedback": "Yalan söylemek sorunu çözmez." },
+          { "text": "Hasta olduğumu söylerim", "points": 0, "feedback": "Sorumluluğu kabul et ve çözüm bul." }
+        ]
+      }
+    ]
   },
   {
     "id": 5,
@@ -83,15 +167,37 @@
     "description": "Farklılıklara değer vermek",
     "icon": "🌟",
     "color": "#8b5cf6",
-    "scenario": {
-      "title": "Farklı Görüş",
-      "question": "Arkadaşın seninle tamamen farklı bir fikre sahip. Nasıl tepki verirsin?",
-      "options": [
-        { "text": "Fikrini dinler, kendi görüşümü saygıyla paylaşırım", "points": 100, "feedback": "Mükemmel! Saygı, farklılıkları zenginlik olarak görmektir." },
-        { "text": "Tartışmadan kaçınırım", "points": 50, "feedback": "Saygılısın ama iletişim de önemli." },
-        { "text": "Fikrimin daha doğru olduğunu ispatlarım", "points": 30, "feedback": "Her fikir değerlidir, kazanmak değil anlamak önemli." },
-        { "text": "Onunla dalga geçerim", "points": 0, "feedback": "Saygı, her görüşe değer vermektir." }
-      ]
-    }
+    "scenarios": [
+      {
+        "title": "Farklı Görüş",
+        "question": "Arkadaşın seninle tamamen farklı bir fikre sahip. Nasıl tepki verirsin?",
+        "options": [
+          { "text": "Fikrini dinler, kendi görüşümü saygıyla paylaşırım", "points": 100, "feedback": "Mükemmel! Saygı, farklılıkları zenginlik olarak görmektir." },
+          { "text": "Tartışmadan kaçınırım", "points": 50, "feedback": "Saygılısın ama iletişim de önemli." },
+          { "text": "Fikrimin daha doğru olduğunu ispatlarım", "points": 30, "feedback": "Her fikir değerlidir, kazanmak değil anlamak önemli." },
+          { "text": "Onunla dalga geçerim", "points": 0, "feedback": "Saygı, her görüşe değer vermektir." }
+        ]
+      },
+      {
+        "title": "Farklı Kültür",
+        "question": "Sınıfa farklı bir kültürden öğrenci geldi. Arkadaşların onunla dalga geçiyor. Ne yaparsın?",
+        "options": [
+          { "text": "Arkadaşlarımı uyarır, yeni öğrenciyle arkadaş olurum", "points": 100, "feedback": "Harika! Farklılıklara saygı gösteriyorsun." },
+          { "text": "Dalga geçmem ama müdahale de etmem", "points": 50, "feedback": "İyi ama savunmak daha cesurca olurdu." },
+          { "text": "Sessiz kalırım", "points": 20, "feedback": "Sessiz kalmak da bir seçimdir." },
+          { "text": "Ben de dalga geçerim", "points": 0, "feedback": "Saygı, farklılıkları kabul etmektir." }
+        ]
+      },
+      {
+        "title": "Yaşlı Komşu",
+        "question": "Yaşlı komşun yardıma ihtiyacı var ama arkadaşlarınla oynayacaktın. Ne yaparsın?",
+        "options": [
+          { "text": "Önce komşuma yardım eder, sonra arkadaşlarıma katılırım", "points": 100, "feedback": "Mükemmel! Büyüklere saygı gösteriyorsun." },
+          { "text": "Arkadaşlarıma söyler, birlikte yardım ederiz", "points": 90, "feedback": "Harika fikir! Hem yardım hem takım çalışması." },
+          { "text": "Başka zaman yardım ederim derim", "points": 30, "feedback": "Şimdi ihtiyacı var." },
+          { "text": "Görmezden gelirim", "points": 0, "feedback": "Saygı, yardıma ihtiyacı olanlara el uzatmaktır." }
+        ]
+      }
+    ]
   }
 ]

@@ -1,6 +1,16 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+export interface Scenario {
+  title: string;
+  question: string;
+  options: Array<{
+    text: string;
+    points: number;
+    feedback: string;
+  }>;
+}
+
 export interface Checkpoint {
   id: number;
   name: string;
@@ -10,16 +20,10 @@ export interface Checkpoint {
   icon: string;
   color: string;
   completed: boolean;
+  completedScenarios: number;
+  totalScenarios: number;
   score?: number;
-  scenario: {
-    title: string;
-    question: string;
-    options: Array<{
-      text: string;
-      points: number;
-      feedback: string;
-    }>;
-  };
+  scenarios: Scenario[];
 }
 
 export interface Badge {
@@ -50,7 +54,7 @@ interface GameState {
   
   setCheckpoints: (checkpoints: Checkpoint[]) => void;
   setBadges: (badges: Badge[]) => void;
-  completeCheckpoint: (id: number, score: number) => void;
+  completeScenario: (checkpointId: number, score: number) => void;
   earnBadge: (badgeId: string) => void;
   setDemoMode: (enabled: boolean) => void;
   resetProgress: () => void;
@@ -70,26 +74,37 @@ export const useGameStore = create<GameState>()(
       checkpoints: [],
       badges: [],
       progress: initialProgress,
-      demoMode: false,
+      demoMode: true, // Varsayılan olarak AÇIK
 
       setCheckpoints: (checkpoints) => set({ checkpoints }),
       
       setBadges: (badges) => set({ badges }),
       
-      completeCheckpoint: (id, score) => set((state) => {
-        const checkpoint = state.checkpoints.find(cp => cp.id === id);
-        if (!checkpoint || checkpoint.completed) return state;
+      completeScenario: (checkpointId, score) => set((state) => {
+        const checkpoint = state.checkpoints.find(cp => cp.id === checkpointId);
+        if (!checkpoint) return state;
+
+        const newCompletedScenarios = (checkpoint.completedScenarios || 0) + 1;
+        const isFullyCompleted = newCompletedScenarios >= checkpoint.totalScenarios;
 
         const updatedCheckpoints = state.checkpoints.map(cp =>
-          cp.id === id ? { ...cp, completed: true, score } : cp
+          cp.id === checkpointId ? { 
+            ...cp, 
+            completedScenarios: newCompletedScenarios,
+            completed: isFullyCompleted,
+            score: (cp.score || 0) + score 
+          } : cp
         );
 
         const currentValueScore = state.progress.valueScores[checkpoint.value] || 0;
+        const completedCheckpointsCount = isFullyCompleted && !checkpoint.completed 
+          ? state.progress.completedCheckpoints + 1 
+          : state.progress.completedCheckpoints;
 
         const newProgress = {
           ...state.progress,
           totalPoints: state.progress.totalPoints + score,
-          completedCheckpoints: state.progress.completedCheckpoints + 1,
+          completedCheckpoints: completedCheckpointsCount,
           valueScores: {
             ...state.progress.valueScores,
             [checkpoint.value]: currentValueScore + score,
@@ -119,7 +134,12 @@ export const useGameStore = create<GameState>()(
       setDemoMode: (enabled) => set({ demoMode: enabled }),
       
       resetProgress: () => set((state) => ({
-        checkpoints: state.checkpoints.map(cp => ({ ...cp, completed: false, score: undefined })),
+        checkpoints: state.checkpoints.map(cp => ({ 
+          ...cp, 
+          completed: false, 
+          completedScenarios: 0,
+          score: undefined 
+        })),
         badges: state.badges.map(badge => ({ ...badge, earned: false, earnedAt: undefined })),
         progress: initialProgress,
       })),

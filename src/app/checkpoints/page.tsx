@@ -4,18 +4,17 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useGameStore } from '@/store/gameStore';
 import { checkBadgeEligibility } from '@/utils/badgeChecker';
-import { ArrowLeft, Trophy, QrCode, Lock, CheckCircle } from 'lucide-react';
+import { ArrowLeft, Trophy, CheckCircle, Play } from 'lucide-react';
 import Link from 'next/link';
 
 export default function CheckpointsPage() {
-  const { checkpoints, progress, setCheckpoints, completeCheckpoint, earnBadge, demoMode } = useGameStore();
+  const { checkpoints, progress, setCheckpoints, completeScenario, earnBadge, demoMode } = useGameStore();
   const [selectedCheckpoint, setSelectedCheckpoint] = useState<number | null>(null);
+  const [currentScenarioIndex, setCurrentScenarioIndex] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [lastScore, setLastScore] = useState(0);
   const [lastFeedback, setLastFeedback] = useState('');
   const [newBadges, setNewBadges] = useState<string[]>([]);
-  const [showQRScanner, setShowQRScanner] = useState(false);
-  const [manualCode, setManualCode] = useState('');
 
   useEffect(() => {
     fetch('/models/checkpoints.json')
@@ -24,6 +23,8 @@ export default function CheckpointsPage() {
         const checkpointsWithStatus = data.map((cp: any) => ({
           ...cp,
           completed: checkpoints.find(c => c.id === cp.id)?.completed || false,
+          completedScenarios: checkpoints.find(c => c.id === cp.id)?.completedScenarios || 0,
+          totalScenarios: cp.scenarios.length,
           score: checkpoints.find(c => c.id === cp.id)?.score,
         }));
         setCheckpoints(checkpointsWithStatus);
@@ -32,8 +33,9 @@ export default function CheckpointsPage() {
 
   const handleCheckpointClick = (checkpointId: number) => {
     const checkpoint = checkpoints.find(cp => cp.id === checkpointId);
-    if (checkpoint && !checkpoint.completed) {
+    if (checkpoint) {
       setSelectedCheckpoint(checkpointId);
+      setCurrentScenarioIndex(checkpoint.completedScenarios || 0);
     }
   };
 
@@ -44,7 +46,7 @@ export default function CheckpointsPage() {
     setLastFeedback(feedback);
     setShowResult(true);
 
-    completeCheckpoint(selectedCheckpoint, points);
+    completeScenario(selectedCheckpoint, points);
 
     const eligibleBadges = checkBadgeEligibility(progress);
     const newlyEarned = eligibleBadges.filter(badgeId => !progress.earnedBadges.includes(badgeId));
@@ -56,22 +58,11 @@ export default function CheckpointsPage() {
       setShowResult(false);
       setSelectedCheckpoint(null);
       setNewBadges([]);
-    }, 4000);
-  };
-
-  const handleManualCodeSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const checkpointId = checkpoints.find(cp => cp.qrCode === manualCode.toUpperCase())?.id;
-    if (checkpointId) {
-      handleCheckpointClick(checkpointId);
-      setManualCode('');
-      setShowQRScanner(false);
-    } else {
-      alert('Geçersiz kod! Lütfen kontrol noktasındaki kodu girin.');
-    }
+    }, 3000);
   };
 
   const currentCheckpoint = checkpoints.find(cp => cp.id === selectedCheckpoint);
+  const currentScenario = currentCheckpoint?.scenarios[currentScenarioIndex];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900">
@@ -85,22 +76,12 @@ export default function CheckpointsPage() {
             </button>
           </Link>
 
-          <div className="flex items-center gap-3">
-            <Link href="/badges">
-              <button className="flex items-center gap-2 glass-card px-4 py-2 rounded-full text-white hover:bg-slate-800/60 transition-colors">
-                <Trophy className="w-4 h-4 text-yellow-400" />
-                <span className="hidden sm:inline">Rozetler</span>
-              </button>
-            </Link>
-
-            <button
-              onClick={() => setShowQRScanner(!showQRScanner)}
-              className="flex items-center gap-2 bg-indigo-500 hover:bg-indigo-600 px-4 py-2 rounded-full text-white transition-colors"
-            >
-              <QrCode className="w-4 h-4" />
-              <span className="hidden sm:inline">Kod Gir</span>
+          <Link href="/badges">
+            <button className="flex items-center gap-2 glass-card px-4 py-2 rounded-full text-white hover:bg-slate-800/60 transition-colors">
+              <Trophy className="w-4 h-4 text-yellow-400" />
+              <span className="hidden sm:inline">Rozetler</span>
             </button>
-          </div>
+          </Link>
         </div>
 
         {/* Puan Kartı */}
@@ -111,8 +92,8 @@ export default function CheckpointsPage() {
         >
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-white mb-2">Kontrol Noktaları</h1>
-              <p className="text-slate-400">QR kod okut veya kod girerek görevleri aç</p>
+              <h1 className="text-3xl font-bold text-white mb-2">Değer Görevleri</h1>
+              <p className="text-slate-400">Her kontrol noktasında 3 senaryo seni bekliyor!</p>
             </div>
             <div className="text-right">
               <div className="text-4xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
@@ -135,90 +116,64 @@ export default function CheckpointsPage() {
           </div>
         </motion.div>
 
-        {/* QR Kod Giriş */}
-        <AnimatePresence>
-          {showQRScanner && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="glass-card rounded-2xl p-6 mb-6"
-            >
-              <h3 className="text-xl font-bold text-white mb-4">Kontrol Noktası Kodu</h3>
-              <form onSubmit={handleManualCodeSubmit} className="flex gap-3">
-                <input
-                  type="text"
-                  value={manualCode}
-                  onChange={(e) => setManualCode(e.target.value)}
-                  placeholder="Örn: CHECKPOINT_1_HONESTY"
-                  className="flex-1 px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
-                />
-                <button
-                  type="submit"
-                  className="px-6 py-3 bg-indigo-500 hover:bg-indigo-600 rounded-lg text-white font-medium transition-colors"
-                >
-                  Aç
-                </button>
-              </form>
-              <p className="text-sm text-slate-500 mt-2">
-                Demo modunda tüm noktalar açık. Gerçek kullanımda QR kod okutun.
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
         {/* Kontrol Noktaları Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {checkpoints.map((checkpoint, index) => (
-            <motion.div
-              key={checkpoint.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className={`glass-card rounded-2xl p-6 transition-all ${
-                checkpoint.completed
-                  ? 'border-2 border-green-500/50'
-                  : demoMode
-                  ? 'hover:scale-105 cursor-pointer'
-                  : 'opacity-60'
-              }`}
-              onClick={() => (demoMode || checkpoint.completed) && handleCheckpointClick(checkpoint.id)}
-            >
-              <div className="text-center">
-                <div className="text-6xl mb-4">{checkpoint.icon}</div>
-                <h3 className="text-xl font-bold text-white mb-2">{checkpoint.name}</h3>
-                <p className="text-sm text-slate-400 mb-4">{checkpoint.description}</p>
+          {checkpoints.map((checkpoint, index) => {
+            const progressPercent = (checkpoint.completedScenarios / checkpoint.totalScenarios) * 100;
+            
+            return (
+              <motion.div
+                key={checkpoint.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className={`glass-card rounded-2xl p-6 transition-all hover:scale-105 cursor-pointer ${
+                  checkpoint.completed ? 'border-2 border-green-500/50' : ''
+                }`}
+                onClick={() => handleCheckpointClick(checkpoint.id)}
+              >
+                <div className="text-center">
+                  <div className="text-6xl mb-4">{checkpoint.icon}</div>
+                  <h3 className="text-xl font-bold text-white mb-2">{checkpoint.name}</h3>
+                  <p className="text-sm text-slate-400 mb-4">{checkpoint.description}</p>
 
-                {checkpoint.completed ? (
-                  <div className="flex items-center justify-center gap-2 text-green-400 font-semibold">
-                    <CheckCircle className="w-5 h-5" />
-                    <span>Tamamlandı ({checkpoint.score} puan)</span>
-                  </div>
-                ) : demoMode ? (
+                  {checkpoint.completed ? (
+                    <div className="flex items-center justify-center gap-2 text-green-400 font-semibold mb-3">
+                      <CheckCircle className="w-5 h-5" />
+                      <span>Tamamlandı! ({checkpoint.score} puan)</span>
+                    </div>
+                  ) : (
+                    <div className="mb-3">
+                      <div className="flex items-center justify-between text-sm text-slate-400 mb-2">
+                        <span>İlerleme</span>
+                        <span>{checkpoint.completedScenarios}/{checkpoint.totalScenarios}</span>
+                      </div>
+                      <div className="w-full bg-slate-700 rounded-full h-2 overflow-hidden">
+                        <div 
+                          className="h-full bg-gradient-to-r from-indigo-500 to-purple-500"
+                          style={{ width: `${progressPercent}%` }}
+                        />
+                      </div>
+                    </div>
+                  )}
+
                   <button
                     onClick={() => handleCheckpointClick(checkpoint.id)}
-                    className="w-full px-4 py-3 bg-indigo-500 hover:bg-indigo-600 rounded-lg text-white font-medium transition-colors"
+                    className="w-full px-4 py-3 bg-indigo-500 hover:bg-indigo-600 rounded-lg text-white font-medium transition-colors flex items-center justify-center gap-2"
+                    disabled={checkpoint.completed}
                   >
-                    Görevi Başlat
+                    <Play className="w-4 h-4" />
+                    {checkpoint.completed ? 'Tamamlandı' : checkpoint.completedScenarios > 0 ? 'Devam Et' : 'Başla'}
                   </button>
-                ) : (
-                  <div className="flex items-center justify-center gap-2 text-yellow-400">
-                    <Lock className="w-5 h-5" />
-                    <span className="text-sm">QR Kod Gerekli</span>
-                  </div>
-                )}
-
-                <div className="mt-3 text-xs text-slate-500">
-                  Kod: {checkpoint.qrCode}
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Görev Modal */}
         <AnimatePresence>
-          {selectedCheckpoint && currentCheckpoint && !showResult && (
+          {selectedCheckpoint && currentCheckpoint && currentScenario && !showResult && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -236,21 +191,23 @@ export default function CheckpointsPage() {
                 <div className="text-center mb-6">
                   <div className="text-6xl mb-4">{currentCheckpoint.icon}</div>
                   <h2 className="text-3xl font-bold text-white mb-2">{currentCheckpoint.name}</h2>
-                  <p className="text-slate-400">{currentCheckpoint.description}</p>
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-500/20 rounded-full text-indigo-300 text-sm">
+                    Senaryo {currentScenarioIndex + 1} / {currentCheckpoint.totalScenarios}
+                  </div>
                 </div>
 
                 <div className="bg-slate-800/50 rounded-xl p-6 mb-6">
-                  <h3 className="text-xl font-bold text-white mb-4">{currentCheckpoint.scenario.title}</h3>
-                  <p className="text-slate-300 mb-6">{currentCheckpoint.scenario.question}</p>
+                  <h3 className="text-xl font-bold text-white mb-4">{currentScenario.title}</h3>
+                  <p className="text-slate-300 mb-6 text-lg">{currentScenario.question}</p>
 
                   <div className="space-y-3">
-                    {currentCheckpoint.scenario.options.map((option, index) => (
+                    {currentScenario.options.map((option, index) => (
                       <button
                         key={index}
                         onClick={() => handleAnswerSelect(option.points, option.feedback)}
                         className="w-full text-left p-4 rounded-lg bg-slate-700/50 hover:bg-indigo-500/20 border-2 border-transparent hover:border-indigo-500 transition-all text-white"
                       >
-                        <span className="font-medium">{String.fromCharCode(65 + index)}.</span> {option.text}
+                        <span className="font-medium text-indigo-400">{String.fromCharCode(65 + index)}.</span> {option.text}
                       </button>
                     ))}
                   </div>
