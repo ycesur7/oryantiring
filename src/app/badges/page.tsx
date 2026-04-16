@@ -38,7 +38,7 @@ export default function BadgesPage() {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
-          <Link href="/map">
+          <Link href="/">
             <button className="flex items-center gap-2 glass-card px-4 py-2 rounded-full text-white hover:bg-slate-800/60 transition-colors">
               <ArrowLeft className="w-4 h-4" />
               Haritaya Dön
